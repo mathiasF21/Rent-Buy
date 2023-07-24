@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    {% if car %}
+        <div class="car_info_box">
+            <h1>{{car.name}}</h1>
+            <p>{{car.description}}</p>
+            <p>Seats Number: {{car.seats_number}}</p>
+            <p>Bags Number: {{car.bags_number}}</p>
+            <p>Rent Price: {{car.rent_price}} CAD/DAY</p>
+            <p>Full Price: {{car.full_price}} CAD</p>
+            {% if current_user.is_authenticated %}
+                <div class="car_forms">
+                    <form action="{{ url_for('info.rent_car', car_name=car.name, user_id=current_user.id) }}" method="GET">
+                        <input type="number" name="number_of_days" id="number_of_days" class="form-control" placeholder="Days to rent" aria-label="Example text with button addon" aria-describedby="button-addon1" required>
+                        <button class="btn btn-primary" type="submit">Rent</button>
+                    </form>
+                    <form action="{{ url_for('info.buy_car', car_name=car.name, user_id=current_user.id) }}" method="GET">
+                        <button class="btn btn-success" type="submit">Buy</button>
+                    </form>                    
+                </div>
+            {% else %}
+                <div class="alert alert-primary" role="alert">
+                    You must first create an account or sign in to rent or buy a vehicle.
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No car features available.</p>
+    {% endif %}
+    <div class="wave">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>
+{% endblock %}

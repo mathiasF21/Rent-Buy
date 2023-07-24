@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+body {
+    background-color: #FBF8BE;
+}
+
+.about_me_box, .car_info_box {
+    width: 600px;
+    height: 400px;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+    font-family: sans-serif;
+    padding: 1.5%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    border-radius: 10px;
+}
+.car_info_box {
+    margin-top: 15px;
+    height: 1%;
+}
+.car_info_box form {
+    display: inline-block;
+}
+.car_info_box button {
+    width: 200px;
+}
+.car_forms {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: solid  #234E70;
+    border-radius: 1%;
+}
+.sign_up_form, .sign_in_form, .edit_user_form, .change_pdw_form{
+    max-width: 400px;
+    margin: auto;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    border-radius: 10px;
+}
+.sign_in_form {
+    padding-bottom: 5px;
+}
+.sign_up_form label {
+    margin-top: 10px;
+}
+#form_button {
+    margin-top: 5%;
+}
+#button_edit {
+    margin-bottom: 20px;
+}
+.navbar-nav .nav-item:nth-child(2):hover a,
+.navbar-nav .nav-item:nth-child(3):hover a {
+    color: blue;
+}
+.edit_user_form div:nth-child(3) {
+    padding-bottom: 20px;
+}
+.carousel.slide {
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;   
+    box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45), 0px 25px 20px -20px rgba(0, 0, 0, 0.45), -25px 0 20px -20px rgba(0, 0, 0, 0.45);
+}
+h5 {
+    background-color: black;
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    opacity: 0.8;
+}
+#common_picks {
+    color: white;
+    width: 50%;
+    border: none;
+    font-style: italic;
+    font-weight: bold;
+    margin-right: 5%;
+    margin-top: 1.5%;
+    box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45), 0px 25px 20px -20px rgba(0, 0, 0, 0.45), -25px 0 20px -20px rgba(0, 0, 0, 0.45);
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+}
+.card-title {
+    background-color: white;
+    border-color: white;
+}
+.cards {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color:  #234E70;
+    margin-bottom: 40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.card {
+    margin: 1%;
+    align-content: flex-start;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 0;
+}
+
+.wave svg {
+    position: relative;
+    display: block;
+    width: calc(135% + 1.3px);
+    height: 119px;
+    transform: rotateY(180deg);
+}
+.wave .shape-fill {
+    fill: #234E70;
+}
+.presentation_container {
+    display: flex;
+}
+.presentation_container h1,h3 {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    color: #234E70;
+    padding: 10px;
+    text-align: center;
+    margin-top: 50%;
+}
+.presentation_container h1 {
+    border: solid;
+    margin-left: 10%;
+}
+.sign_in_form p {
+    margin-top: 20px;
+    text-align: center;
+}
+.accordion {
+    width: 95%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+#FAQ {
+    color: #234E70;
+    font-weight: bold;
+}
+#user_cars {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    border: solid;
+    border-radius: 10px;
+}
+#button_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}

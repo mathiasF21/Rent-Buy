@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="presentation_container">
+  <div>
+    <h1>Buy? Rent?<br>We offer both!</h1>
+    <h3>Our Collection</h3>
+  </div>
+  <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../static/car_mercedesBenzAClass.jpg" class="d-block w-100" alt="Mercedes-Benz A-Class">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Mercedes-Benz A Class</h5>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../static/car_brabusConvertible.jpg" class="d-block w-100" alt="Brabus Convertible">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Brabus Convertible</h5>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../static/car_fordFocus.jpg" class="d-block w-100" alt="Ford Focus">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Ford Focus</h5>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+</div>
+<div>
+<div class="cards">
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_brabusConvertible.jpg" class="card-img-top" alt="Brabus Convertible">
+    <div class="card-body">
+      <h5 class="card-title">Brabus Convertible</h5>
+      <p class="card-text">A two-door car designed primarily for urban use.</p>
+      <a href="{{url_for('info.display_information', car_name='Brabus Convertible')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_fordFocus.jpg" class="card-img-top" alt="Ford Focus">
+    <div class="card-body">
+      <h5 class="card-title">Ford Focus</h5>
+      <p class="card-text">The Focus is Ford's longtime entry in the compact car class.</p>
+      <a href="{{url_for('info.display_information', car_name='Ford Focus')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_mercedesBenzAClass.jpg" class="card-img-top" alt="Mercedes-Benz A-Class">
+    <div class="card-body">
+      <h5 class="card-title">Mercedes-Benz A-Class</h5>
+      <p class="card-text">A small car with the heart of an S-class luxury sedan.</p>
+      <a href="{{url_for('info.display_information', car_name='Mercedes-Benz A-Class')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_MercedesBenzG350d.jpg" class="card-img-top" alt="Mercedes-Benz G350d">
+    <div class="card-body">
+      <h5 class="card-title">Mercedes-Benz G350d</h5>
+      <p class="card-text">It is sometimes colloquially called the G-Wagen is a four-wheel drive automobile manufactured by Magna Steyr.</p>
+      <a href="{{url_for('info.display_information', car_name='Mercedes-Benz G350d')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_toyotaRav4.jpg" class="card-img-top" alt="Toyota Rav4">
+    <div class="card-body">
+      <h5 class="card-title">Toyota Rav4</h5>
+      <p class="card-text">The RAV4 is a small, compact SUV, recommended for families.</p>
+      <a href="{{url_for('info.display_information', car_name='Toyota Rav4')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_audiCedan.jpg" class="card-img-top" alt="Audi Sedan">
+    <div class="card-body">
+      <h5 class="card-title">Audi Sedan A4</h5>
+      <p class="card-text">The Audi boasts a profusion of headroom and legroom in the back even for full-sized 6-foot tall passengers.</p>
+      <a href="{{url_for('info.display_information', car_name='Audi Sedan')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_blackHyundai.jpg" class="card-img-top" alt="Blakc Hyundai">
+    <div class="card-body">
+      <h5 class="card-title">Hyundai Tucson Hybrid</h5>
+      <p class="card-text">A hybrid SUV powered by an internal combustion engine that works in concert with an electric motor.</p>
+      <a href="{{url_for('info.display_information', car_name='Hyundai Tucson Hybrid')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+  <div class="card" style="width: 18rem;">
+    <img src="../static/car_bmwSedan.jpg" class="card-img-top" alt="Blue BMW Sedan">
+    <div class="card-body">
+      <h5 class="card-title">Bmw Sedan</h5>
+      <p class="card-text">Long regarded as BMW's flagship full-size luxury sedan.</p>
+      <a href="{{url_for('info.display_information', car_name='BMW 3 Series Sedan')}}" class="btn btn-primary">Buy/Rent</a>
+    </div>
+  </div>
+</div>
+</div>
+<h2 id="FAQ">FAQs about renting a car...</h2>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        When will I be charged for my rental car?
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">The rental company will charge you directly for any applicable taxes, fees and surcharges when you pick up or drop off your car.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        What do I need to bring when I pick up my rental car?
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">The car hire company staff will ask to see some proof of your identity. This could be your passport, or proof of address if you're hiring in your own country.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        How much is gas price in Montreal?
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">The price of 1 liter (1/4 gallon) of gas in Montreal is C$1.75</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+        What steps are being taken to clean rental cars?
+      </button>
+    </h2>
+    <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">After every rental, every car is thoroughly cleaned: vacuumed, wiped down and sanitised with disinfectant.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+        Can I extend or cancel my reservation?
+      </button>
+    </h2>
+    <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Cancellations are accepted at anytime where a form of payment, like a credit or debit card, is not provided to secure the rental reservation.If you have already picked up your vehicle and wish to keep it longer; you must contact the location where you picked up the vehicle.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+        Can I drive my rental car outside the Canada?
+      </button>
+    </h2>
+    <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Vehicles rented in Canada can be driven throughout Canada and the US.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

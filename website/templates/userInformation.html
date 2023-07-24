@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{%block title%}
+Account Information
+{%endblock%}
+
+{% block content %}
+    {% if cars_rented_bought %}
+    <table class="table table-striped" id="user_cars">
+        <thead>
+            <tr>
+                <th scope="col">Car Name</th>
+                <th scope="col">Ownership Type</th>
+                <th scope="col">Days Rented</th>
+                <th scope="col">Cancel</th>
+                <th scope="col">Extend</th>
+                <th scope="col">Sell</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars_rented_bought %}
+            <tr>
+                <td>{{ car['car_name'] }}</td>
+                <td>{{ car['ownership_type'] }}</td>
+                <td>{{ car['nm_days_rented'] }}</td>
+                <td>
+                    {% if car['ownership_type'] == 'rented' %}
+                        <!-- Button within the table cell -->
+                        <form action="{{ url_for('users.cancel_car', car_name=car['car_name'], user_id=current_user.id) }}" method="POST">
+                            <button class="btn btn-warning" type="submit">CANCEL</button>
+                        </form> 
+                    {% endif %}
+                </td>
+                <td>
+                    {% if car['ownership_type'] == 'rented' %}
+                    <form action="{{ url_for('users.extend_rent', car_name=car['car_name'], user_id=current_user.id) }}" method="GET">
+                        <input type="number" name="number_of_days" id="number_of_days" class="form-control" placeholder="Days to rent" aria-label="Example text with button addon" aria-describedby="button-addon1" required>
+                        <button class="btn btn-success" type="submit">EXTEND</button>
+                    </form>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if car['ownership_type'] != 'rented' %}
+                        <form action="{{ url_for('users.sell_car', car_name=car['car_name'], user_id=current_user.id) }}" method="POST">
+                            <button class="btn btn-danger" type="submit">SELL</button>
+                        </form>   
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else%}
+      <div class="alert alert-primary" role="alert">
+            Once you buy or rent a car, it will appear here.
+      </div>      
+    {% endif %}
+    <div id="button_container">
+        <a class="btn btn-primary" href="{{url_for('users.editUser', email=currentUser.email)}}" role="button">Edit profile</a>
+    </div>
+    <div class="wave">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>
+{% endblock %}
