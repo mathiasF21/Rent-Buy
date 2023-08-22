@@ -23,7 +23,7 @@
                 <a class="nav-link active" aria-current="page" href="{{url_for('home.about')}}">About</a>
               </li>
               {% if not current_user.is_authenticated %}
-                <li class="nav-item">
+                <li class="nav-item" id="open-button">
                   <a class="nav-link active" aria-current="page" href="{{url_for('auth.sign_up')}}">Open an account</a>
                 </li>
                 <li class="nav-item">

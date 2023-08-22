@@ -177,3 +177,12 @@ h5 {
     align-items: center;
     margin-top: 10px;
 }
+
+#open-button {
+    background-color: #234E70;
+    border-radius: 10%;
+}
+
+#open-button a {
+    color:#FBF8BE;
+}
