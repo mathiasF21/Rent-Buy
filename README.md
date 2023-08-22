@@ -9,3 +9,6 @@ Clients must sign in or create an account to buy/rent a car, they have a variety
 4 - HTML (JINJA)
 5 - CSS (BOOTSTRAP)
 Editor: Visual Studio Code
+#An Inside Look:
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/d276e458-b832-4c66-98bc-6a3cdc4d61a1)
+
