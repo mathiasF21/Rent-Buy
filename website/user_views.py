@@ -72,10 +72,15 @@ def cancel_car(car_name, user_id):
 def extend_rent(car_name, user_id): 
     try:
         currentUser = db.get_user_id(user_id)
+        email = currentUser.email
         car = db.get_car(car_name)
         number_of_days = int(request.args.get('number_of_days'))
-        if currentUser.funds < car.rent_price * number_of_days:
+        if number_of_days <= 0:
+            flash("It cannot be zero or a negative number", category='error')
+            return redirect(url_for('users.show_user', email=email))
+        elif currentUser.funds < car.rent_price * number_of_days:
             flash("Oh no! You don't have enough funds to rent this this amount of days more, try with less days.", category='error')
+            return redirect(url_for('users.show_user', email=email))
         else:
             db.extend_rent(car.car_id,user_id,number_of_days, car.rent_price)
             flash(f'Successfully extended the rent for: {car_name}', category='success')

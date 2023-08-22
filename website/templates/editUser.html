@@ -14,7 +14,7 @@ Edit User
     {{ form.name(class="form-control", placeholder="Enter new name", value=currentUser.name) }}
   </div>
   <div class="form-group">
-    {{ form.funds.label }} 
+    {{ form.funds.label }} <span>{{currentUser.funds}}</span>
     {{ form.funds(class="form-control", placeholder="Enter additional funds", value=0) }}
   </div>
   <div class="form-group" id="button_edit">
