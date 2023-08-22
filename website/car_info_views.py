@@ -36,7 +36,10 @@ def rent_car(car_name, user_id):
         user = db.get_user_id(user_id)
         userFunds = user.funds
         number_of_days = int(request.args.get('number_of_days'))
-        if userFunds < carChosen.rent_price * number_of_days:
+        if number_of_days <= 0:
+            flash("It cannot be zero or a negative number", category='error')
+            return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
+        elif userFunds < carChosen.rent_price * number_of_days:
             flash("Oh no! You don't have enough funds to rent this car, try with less days.", category='error')
             return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
         else:
