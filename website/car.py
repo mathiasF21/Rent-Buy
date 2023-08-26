@@ -1,7 +1,3 @@
-from flask_wtf import FlaskForm
-from wtforms import EmailField, PasswordField, StringField, SubmitField, IntegerField
-from wtforms.validators import DataRequired,EqualTo, Regexp, Length
-
 class Car():
     def __init__(self, name, description, seats_number, bags_number, rent_price, full_price):
         if not isinstance(name, str):

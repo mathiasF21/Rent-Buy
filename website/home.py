@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template
 
-from .user import LoginForm
-
 home = Blueprint('home', __name__, url_prefix="/")
 
 @home.route('/')

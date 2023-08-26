@@ -29,7 +29,7 @@ def sign_up():
     return render_template("sign_up.html",form=form)
 
 @auth.route('/logout/')
-#@login_required
+@login_required
 def logout():
     logout_user()
     return redirect(url_for("home.main_page"))

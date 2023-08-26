@@ -1,4 +1,4 @@
-import pyodbc as odbc
+import pyodbc
 
 from website.car import Car
 from .user import User
