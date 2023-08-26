@@ -3,9 +3,9 @@ from .database import Database
 
 db = Database()
 
-car_info = Blueprint("info", __name__, url_prefix='/car-information/')
+bp = Blueprint("info", __name__, url_prefix='/car-information/')
 
-@car_info.route('/<string:car_name>/', methods=['GET', 'POST'])
+@bp.route('/<string:car_name>/', methods=['GET', 'POST'])
 def display_information(car_name):
     try:
         car = db.get_car(car_name)
@@ -13,7 +13,7 @@ def display_information(car_name):
         flash("Error occurred.", category='error')
     return render_template("carInformation.html", car=car)
 
-@car_info.route('/buy/<string:car_name>/<int:user_id>/', methods=['GET', 'POST'])
+@bp.route('/buy/<string:car_name>/<int:user_id>/', methods=['GET', 'POST'])
 def buy_car(car_name, user_id):
     try:
         carChosen = db.get_car(car_name)
@@ -29,7 +29,7 @@ def buy_car(car_name, user_id):
         flash("Error occurred.", category='error')
     return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
 
-@car_info.route('/rent/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
+@bp.route('/rent/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
 def rent_car(car_name, user_id):
     try:
         carChosen = db.get_car(car_name)

@@ -6,9 +6,9 @@ from werkzeug.security import check_password_hash
 
 db = Database()
 
-checking_in = Blueprint('sign_in', __name__, url_prefix="/sign_in/")
+bp = Blueprint('sign_in', __name__, url_prefix="/sign_in/")
 
-@checking_in.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def sign_in():
     form = LoginForm()
     if request.method == 'POST':

@@ -7,9 +7,9 @@ from .database import Database
 
 db = Database()
 
-auth = Blueprint("auth", __name__, url_prefix='/auth/')
+bp = Blueprint("auth", __name__, url_prefix='/auth/')
 
-@auth.route('/sign_up/', methods=['GET', 'POST'])
+@bp.route('/sign_up/', methods=['GET', 'POST'])
 def sign_up():
     form = SignupForm()
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def sign_up():
             return redirect(url_for('home.main_page'))  
     return render_template("sign_up.html",form=form)
 
-@auth.route('/logout/')
+@bp.route('/logout/')
 @login_required
 def logout():
     logout_user()
