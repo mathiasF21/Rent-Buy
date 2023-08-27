@@ -23,3 +23,10 @@ class Car():
         value = f'{self.name}: Rent price: {self.rent_price} | Full_price: {self.full_price}'
         return value
     
+    def to_json(self):
+        return self.__dict__
+    
+    def from_json(car_str):
+        if not isinstance (car_str, str):
+            raise Exception ("Expected a string")
+        return Car(car_str['car_id'], car_str['name'])
