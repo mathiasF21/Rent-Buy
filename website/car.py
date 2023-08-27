@@ -26,7 +26,15 @@ class Car():
     def to_json(self):
         return self.__dict__
     
-    def from_json(car_str):
-        if not isinstance (car_str, str):
-            raise Exception ("Expected a string")
-        return Car(car_str['car_id'], car_str['name'])
+    @classmethod
+    def from_json(cls, car_json):
+        if not isinstance(car_json, dict):
+            raise TypeError("Expected a dictionary")
+        return cls(
+            name=car_json.get('name'),
+            description=car_json.get('description'),
+            seats_number=car_json.get('seats_number'),
+            bags_number=car_json.get('bags_number'),
+            rent_price=car_json.get('rent_price'),
+            full_price=car_json.get('full_price') 
+        )

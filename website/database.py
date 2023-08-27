@@ -99,11 +99,13 @@ class Database:
         self.cursor.execute('UPDATE Cars_Owned SET ownership_type = ? WHERE car_d = ?', (ownership_type, car_id))
         self.conn.commit()
 
-    def update_car(self, car):
+    def update_car(self, car_id, car):
         if not isinstance(car, Car):
             raise TypeError("Expected a Car object")
+        if not isinstance(car_id, int):
+            raise TypeError("Expected an integer")
         sql = 'UPDATE Cars SET name = ?, description = ?, seats_number = ?, bags_number = ?, rent_price = ?, full_price = ? WHERE car_id = ?'
-        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car.car_id))
+        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car_id))
         self.conn.commit()
 
     def buy_car(self, car_id, user_id, full_price):
