@@ -4,7 +4,7 @@ from wtforms import EmailField, PasswordField, StringField, SubmitField, Integer
 from wtforms.validators import DataRequired,EqualTo, Regexp, Length
 
 class User(UserMixin):
-    def __init__(self, email, password, name, member_type=None, funds=None):
+    def __init__(self, email, password, name, user_type="member", funds=0):
         if not isinstance(email, str):
             raise TypeError('Email must be a string')
         if not isinstance(password, str):
@@ -15,8 +15,8 @@ class User(UserMixin):
         self.name= name
         self.password = password
         self.id = None
-        self.member_type = None
-        self.funds = None
+        self.user_type = user_type
+        self.funds = funds
         
     def __repr__(self):
         return f'User({self.name}, {self.email})'
@@ -36,7 +36,7 @@ class User(UserMixin):
             email=user_json.get('email'),
             password=user_json.get('password'),
             name=user_json.get('name'),
-            member_type=user_json.get('type'),
+            user_type=user_json.get('user_type'),
             funds=user_json.get('funds')
         )
 

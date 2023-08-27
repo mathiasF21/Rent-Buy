@@ -15,30 +15,30 @@ class Database:
         self.cursor = self.conn.cursor()
 
     def get_user(self, email):
-        result = self.cursor.execute('SELECT email, password, name, type, id, funds FROM USERS WHERE email = ?', email)
+        result = self.cursor.execute('SELECT email, password, name, user_type, id, funds FROM USERS WHERE email = ?', email)
         for row in result:
             user = User(row[0], row[1], row[2])
-            user.member_type = row[3]
+            user.user_type = row[3]
             user.id = row[4]
             user.funds = row[5]
             return user
     
     def get_users(self):
         users = []
-        result = self.cursor.execute('SELECT id, email, name, password, type, funds FROM USERS')
+        result = self.cursor.execute('SELECT id, email, name, password, user_type, funds FROM USERS')
         for row in result:
             user = User(row[1],row[3],row[2])
-            user.member_type = row[4]
+            user.user_type = row[4]
             user.id = row[0]
             user.funds = row[5]
             users.append(user)
         return users
         
     def get_user_id(self, id):
-        result = self.cursor.execute('SELECT email, password, name, type, id, funds FROM USERS WHERE id = ?', id)
+        result = self.cursor.execute('SELECT email, password, name, user_type, id, funds FROM USERS WHERE id = ?', id)
         for row in result:
             user = User(row[0], row[1], row[2])
-            user.member_type = row[3]
+            user.user_type = row[3]
             user.id = row[4]
             user.funds = row[5]
             return user
@@ -64,14 +64,14 @@ class Database:
             raise TypeError("Expected an integer.")
         if not isinstance(user, User):
             raise TypeError("Expected an object type User")
-        self.cursor.execute('UPDATE USERS SET password = ?, name = ?, type = ?, funds = ? WHERE id = ?',
-                            (user.password, user.name, user.member_type, user.funds, user_id))
+        self.cursor.execute('UPDATE USERS SET password = ?, name = ?, user_type = ?, funds = ? WHERE id = ?',
+                            (user.password, user.name, user.user_type, user.funds, user_id))
         self.conn.commit()
 
     def update_user_type(self, email):
         if not isinstance(email, str):
             raise TypeError("Expected a string.")
-        self.cursor.execute('UPDATE USERS SET type = ? WHERE email = ?', ('premium', email))
+        self.cursor.execute('UPDATE USERS SET user_type = ? WHERE email = ?', ('premium', email))
         self.conn.commit()
 
     def create_user(self, user):

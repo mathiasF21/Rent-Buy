@@ -16,9 +16,9 @@ def id_user_send(user_id):
         else:
             return jsonify({"error": "User not found with that ID"}), 404
     elif request.method == "DELETE":
-        user = db.get_car_id(user_id)
+        user = db.get_user_id(user_id)
         if user:
-            db.delete_car(int(user_id))
+            db.delete_user(user.email)
             resp = make_response({"message": "User successfully removed"}, 204)
             return resp
         else:
@@ -34,7 +34,7 @@ def id_user_send(user_id):
             return jsonify({"error": "User not found with that ID"}), 404
 
 @bp.route("", methods = ["GET", "POST"])
-def get_post_cars():
+def get_post_user():
     if request.method == "GET":
         users = db.get_users()
         if users:        
