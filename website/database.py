@@ -15,19 +15,30 @@ class Database:
         self.cursor = self.conn.cursor()
 
     def get_user(self, email):
-        result = self.cursor.execute('SELECT email, password, name, type, id, funds FROM USERS WHERE email = ?', email)
+        result = self.cursor.execute('SELECT email, password, name, user_type, id, funds FROM USERS WHERE email = ?', email)
         for row in result:
             user = User(row[0], row[1], row[2])
-            user.member_type = row[3]
+            user.user_type = row[3]
             user.id = row[4]
             user.funds = row[5]
             return user
+    
+    def get_users(self):
+        users = []
+        result = self.cursor.execute('SELECT id, email, name, password, user_type, funds FROM USERS')
+        for row in result:
+            user = User(row[1],row[3],row[2])
+            user.user_type = row[4]
+            user.id = row[0]
+            user.funds = row[5]
+            users.append(user)
+        return users
         
     def get_user_id(self, id):
-        result = self.cursor.execute('SELECT email, password, name, type, id, funds FROM USERS WHERE id = ?', id)
+        result = self.cursor.execute('SELECT email, password, name, user_type, id, funds FROM USERS WHERE id = ?', id)
         for row in result:
             user = User(row[0], row[1], row[2])
-            user.member_type = row[3]
+            user.user_type = row[3]
             user.id = row[4]
             user.funds = row[5]
             return user
@@ -48,10 +59,19 @@ class Database:
         self.cursor.execute('UPDATE USERS SET funds = funds + ? WHERE email = ?', (additional_funds, email))
         self.conn.commit()
 
+    def update_user(self, user_id, user):
+        if not isinstance(user_id, int):
+            raise TypeError("Expected an integer.")
+        if not isinstance(user, User):
+            raise TypeError("Expected an object type User")
+        self.cursor.execute('UPDATE USERS SET password = ?, name = ?, user_type = ?, funds = ? WHERE id = ?',
+                            (user.password, user.name, user.user_type, user.funds, user_id))
+        self.conn.commit()
+
     def update_user_type(self, email):
         if not isinstance(email, str):
             raise TypeError("Expected a string.")
-        self.cursor.execute('UPDATE USERS SET type = ? WHERE email = ?', ('premium', email))
+        self.cursor.execute('UPDATE USERS SET user_type = ? WHERE email = ?', ('premium', email))
         self.conn.commit()
 
     def create_user(self, user):
@@ -75,6 +95,15 @@ class Database:
             car.car_id = row[0]
             return car
         
+    def get_cars(self):
+        cars = []
+        result  = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price FROM Cars')
+        for row in result:
+            car = Car(row[1],row[2],row[3],row[4],row[5], row[6])
+            car.car_id = row[0]
+            cars.append(car)
+        return cars
+    
     def get_car_id(self, car_id):
         if not isinstance(car_id, int):
             raise TypeError("Expected an integer.")
@@ -90,6 +119,15 @@ class Database:
         self.cursor.execute('UPDATE Cars_Owned SET ownership_type = ? WHERE car_d = ?', (ownership_type, car_id))
         self.conn.commit()
 
+    def update_car(self, car_id, car):
+        if not isinstance(car, Car):
+            raise TypeError("Expected a Car object")
+        if not isinstance(car_id, int):
+            raise TypeError("Expected an integer")
+        sql = 'UPDATE Cars SET name = ?, description = ?, seats_number = ?, bags_number = ?, rent_price = ?, full_price = ? WHERE car_id = ?'
+        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car_id))
+        self.conn.commit()
+
     def buy_car(self, car_id, user_id, full_price):
         if not isinstance(car_id, int):
             raise TypeError("Expected an integer")
@@ -97,6 +135,19 @@ class Database:
             raise TypeError("Expected an integer")
         self.cursor.execute('UPDATE USERS SET funds = (funds - ?) WHERE id = ?',(full_price, user_id))
         self.cursor.execute('INSERT INTO Cars_Owned (car_id, user_id, ownership_type) VALUES (?, ?, ?)', (car_id, user_id, 'bought'))
+        self.conn.commit()
+
+    def delete_car(self, car_id):
+        if not isinstance(car_id, int):
+            raise TypeError("Expected an integer")
+        self.cursor.execute("DELETE FROM Cars WHERE car_id = ?", (car_id))
+        self.conn.commit()
+    
+    def add_car(self, car):
+        if not isinstance(car, Car):
+            raise TypeError("Expected a Car object")
+        sql = 'INSERT INTO Cars (name,description,seats_number,bags_number,rent_price,full_price) VALUES (?,?,?,?,?,?)'
+        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price))                                                                                                 
         self.conn.commit()
 
     def rent_car(self, car_id, user_id, number_of_days, rent_price):

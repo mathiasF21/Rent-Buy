@@ -18,20 +18,26 @@ def create_app(test_config=None):
 
     init_app(app)
 
-    from .auth import auth as auth_bp
+    from .auth import bp as auth_bp
     app.register_blueprint(auth_bp)
 
-    from .user_views import users as users_bp
+    from .user_views import bp as users_bp
     app.register_blueprint(users_bp)
 
-    from .home import home as home_bp
+    from .home import bp as home_bp
     app.register_blueprint(home_bp)
 
-    from .sign_in import checking_in as sign_bp
+    from .sign_in import bp as sign_bp
     app.register_blueprint(sign_bp)
 
-    from .car_info_views import car_info as car_bp
+    from .car_info_views import bp as car_bp
     app.register_blueprint(car_bp)
+
+    from .cars_api import bp as cars_api_bp
+    app.register_blueprint(cars_api_bp)
+
+    from .users_api import bp as users_api_bp
+    app.register_blueprint(users_api_bp)
 
     @app.errorhandler(404)
     def page_not_found(error):

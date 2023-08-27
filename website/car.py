@@ -23,3 +23,18 @@ class Car():
         value = f'{self.name}: Rent price: {self.rent_price} | Full_price: {self.full_price}'
         return value
     
+    def to_json(self):
+        return self.__dict__
+    
+    @classmethod
+    def from_json(cls, car_json):
+        if not isinstance(car_json, dict):
+            raise TypeError("Expected a dictionary")
+        return cls(
+            name=car_json.get('name'),
+            description=car_json.get('description'),
+            seats_number=car_json.get('seats_number'),
+            bags_number=car_json.get('bags_number'),
+            rent_price=car_json.get('rent_price'),
+            full_price=car_json.get('full_price') 
+        )

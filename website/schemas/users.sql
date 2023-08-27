@@ -5,7 +5,7 @@ CREATE TABLE Users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(300) NOT NULL,
-    type VARCHAR(50) DEFAULT 'member',
+    user_type VARCHAR(50) DEFAULT 'member',
     funds decimal DEFAULT 2000 NOT NULL
 );
 

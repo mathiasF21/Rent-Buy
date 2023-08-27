@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template
 
-home = Blueprint('home', __name__, url_prefix="/")
+bp = Blueprint('home', __name__, url_prefix="/")
 
-@home.route('/')
+@bp.route('/')
 def main_page():
     return render_template('home.html')
 
-@home.route('/about/')
+@bp.route('/about/')
 def about():
     return render_template("about.html")
 

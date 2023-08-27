@@ -5,9 +5,9 @@ from werkzeug.security import generate_password_hash
 
 db = Database()
 
-users = Blueprint('users',__name__,url_prefix='/My_Account/')
+bp = Blueprint('users',__name__,url_prefix='/My_Account/')
 
-@users.route('/<string:email>/')
+@bp.route('/<string:email>/')
 def show_user(email):
     try:
         currentUser = db.get_user(email)
@@ -16,7 +16,7 @@ def show_user(email):
     except Exception as e:
         abort(404)
 
-@users.route('/edit/<string:email>/', methods=['GET', 'POST'])
+@bp.route('/edit/<string:email>/', methods=['GET', 'POST'])
 def editUser(email):
     try:
         currentUser = db.get_user(email)
@@ -31,7 +31,7 @@ def editUser(email):
     except Exception as e:
         abort(404)
     
-@users.route('/edit/<string:email>/passwordChange/', methods=['GET','POST'])
+@bp.route('/edit/<string:email>/passwordChange/', methods=['GET','POST'])
 def edit_user_password(email):
     try:
         userChosen = db.get_user(email)
@@ -44,7 +44,7 @@ def edit_user_password(email):
     except Exception as e:
         abort(404)
 
-@users.route('/sell/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
+@bp.route('/sell/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
 def sell_car(car_name, user_id):
     try:
         currentUser = db.get_user_id(user_id)
@@ -56,7 +56,7 @@ def sell_car(car_name, user_id):
     except Exception as e:
         abort(404)
 
-@users.route('/cancel/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
+@bp.route('/cancel/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
 def cancel_car(car_name, user_id):
     try:
         currentUser = db.get_user_id(user_id)
@@ -68,7 +68,7 @@ def cancel_car(car_name, user_id):
     except Exception as e:
         abort(404)
 
-@users.route('/extend/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
+@bp.route('/extend/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
 def extend_rent(car_name, user_id): 
     try:
         currentUser = db.get_user_id(user_id)
