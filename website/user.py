@@ -4,7 +4,7 @@ from wtforms import EmailField, PasswordField, StringField, SubmitField, Integer
 from wtforms.validators import DataRequired,EqualTo, Regexp, Length
 
 class User(UserMixin):
-    def __init__(self, email, password, name):
+    def __init__(self, email, password, name, member_type=None, funds=None):
         if not isinstance(email, str):
             raise TypeError('Email must be a string')
         if not isinstance(password, str):
@@ -24,6 +24,21 @@ class User(UserMixin):
     def __str__(self):
         value = f'{self.name}: {self.email}'
         return value
+    
+    def to_json(self):
+        return self.__dict__
+    
+    @classmethod
+    def from_json(cls, user_json):
+        if not isinstance(user_json, dict):
+            raise TypeError("Expected a dictionary")
+        return cls(
+            email=user_json.get('email'),
+            password=user_json.get('password'),
+            name=user_json.get('name'),
+            member_type=user_json.get('type'),
+            funds=user_json.get('funds')
+        )
 
 class SignupForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()])

@@ -36,6 +36,9 @@ def create_app(test_config=None):
     from .cars_api import bp as cars_api_bp
     app.register_blueprint(cars_api_bp)
 
+    from .users_api import bp as users_api_bp
+    app.register_blueprint(users_api_bp)
+
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template('404.html'), 404

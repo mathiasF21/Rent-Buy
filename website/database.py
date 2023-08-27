@@ -22,6 +22,17 @@ class Database:
             user.id = row[4]
             user.funds = row[5]
             return user
+    
+    def get_users(self):
+        users = []
+        result = self.cursor.execute('SELECT id, email, name, password, type, funds FROM USERS')
+        for row in result:
+            user = User(row[1],row[3],row[2])
+            user.member_type = row[4]
+            user.id = row[0]
+            user.funds = row[5]
+            users.append(user)
+        return users
         
     def get_user_id(self, id):
         result = self.cursor.execute('SELECT email, password, name, type, id, funds FROM USERS WHERE id = ?', id)
@@ -46,6 +57,15 @@ class Database:
         if not isinstance(email, str):
             raise TypeError("Expected a string.")
         self.cursor.execute('UPDATE USERS SET funds = funds + ? WHERE email = ?', (additional_funds, email))
+        self.conn.commit()
+
+    def update_user(self, user_id, user):
+        if not isinstance(user_id, int):
+            raise TypeError("Expected an integer.")
+        if not isinstance(user, User):
+            raise TypeError("Expected an object type User")
+        self.cursor.execute('UPDATE USERS SET password = ?, name = ?, type = ?, funds = ? WHERE id = ?',
+                            (user.password, user.name, user.member_type, user.funds, user_id))
         self.conn.commit()
 
     def update_user_type(self, email):
