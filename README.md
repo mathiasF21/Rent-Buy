@@ -10,6 +10,7 @@ Clients must sign in or create an account to buy/rent a car, they have a variety
 5 - CSS (BOOTSTRAP)
 Editor: Visual Studio Code
 # An Inside Look:
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/edba201d-8449-4dbb-b91e-63990da2f351)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/d276e458-b832-4c66-98bc-6a3cdc4d61a1)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/379c4e6b-464f-4883-ad5d-962c0f8fa5ee)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/ff34642c-5731-42db-bdb0-8ba60ceb48de)
