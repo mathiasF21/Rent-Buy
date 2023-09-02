@@ -161,7 +161,7 @@ class Database:
         self.cursor.execute('INSERT INTO Cars_Owned (car_id, user_id, ownership_type, nm_days_rented) VALUES (?, ?, ?, ?)', (car_id, user_id, 'rented', number_of_days))
         self.conn.commit()
     
-    def get_customer_cars(self, user_id):
+    def get_customer_cars_rented(self, user_id):
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
         self.cursor.execute("""
@@ -169,6 +169,19 @@ class Database:
                             FROM Cars_Owned
                             INNER JOIN Users ON Cars_Owned.user_id = ?
                             INNER JOIN Cars ON Cars_Owned.car_id = Cars.car_id
+                            WHERE Cars_Owned.ownership_type = 'rented';
+                            """, (user_id,))
+        return self.cursor.fetchall()
+    
+    def get_customer_cars_bought(self, user_id):
+        if not isinstance(user_id, int):
+            raise TypeError("Expected an integer")
+        self.cursor.execute("""
+                            SELECT DISTINCT Cars.name AS car_name, Cars_Owned.ownership_type AS ownership_type, nm_days_rented 
+                            FROM Cars_Owned
+                            INNER JOIN Users ON Cars_Owned.user_id = ?
+                            INNER JOIN Cars ON Cars_Owned.car_id = Cars.car_id
+                            WHERE Cars_Owned.ownership_type = 'bought';
                             """, (user_id,))
         return self.cursor.fetchall()
     

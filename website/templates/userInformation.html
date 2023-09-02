@@ -5,55 +5,60 @@ Account Information
 {%endblock%}
 
 {% block content %}
-    {% if cars_rented_bought %}
-    <table class="table table-striped" id="user_cars">
-        <thead>
-            <tr>
-                <th scope="col">Car Name</th>
-                <th scope="col">Ownership Type</th>
-                <th scope="col">Days Rented</th>
-                <th scope="col">Cancel</th>
-                <th scope="col">Extend</th>
-                <th scope="col">Sell</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for car in cars_rented_bought %}
-            <tr>
-                <td>{{ car['car_name'] }}</td>
-                <td>{{ car['ownership_type'] }}</td>
-                <td>{{ car['nm_days_rented'] }}</td>
-                <td>
-                    {% if car['ownership_type'] == 'rented' %}
-                        <!-- Button within the table cell -->
-                        <form action="{{ url_for('users.cancel_car', car_name=car['car_name'], user_id=current_user.id) }}" method="POST">
-                            <button class="btn btn-warning" type="submit">CANCEL</button>
-                        </form> 
-                    {% endif %}
-                </td>
-                <td>
-                    {% if car['ownership_type'] == 'rented' %}
-                    <form action="{{ url_for('users.extend_rent', car_name=car['car_name'], user_id=current_user.id) }}" method="GET">
-                        <input type="number" name="number_of_days" id="number_of_days" class="form-control" placeholder="Days to rent" aria-label="Example text with button addon" aria-describedby="button-addon1" required>
-                        <button class="btn btn-success" type="submit">EXTEND</button>
-                    </form>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if car['ownership_type'] != 'rented' %}
+    {% if cars_bought or cars_rented %}
+        <table class="table table-striped w-25 text-center" id="user_cars">
+            <thead>
+                <tr>
+                    <th scope="col">Car Name</th>
+                    <th scope="col">Sell</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars_bought %}
+                <tr>
+                    <td>{{ car['car_name'] }}</td>
+                    <td>
                         <form action="{{ url_for('users.sell_car', car_name=car['car_name'], user_id=current_user.id) }}" method="POST">
                             <button class="btn btn-danger" type="submit">SELL</button>
                         </form>   
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-striped w-50 text-center"  id="user_cars">
+            <thead>
+                <tr>
+                    <th scope="col">Car Name</th>
+                    <th scope="col">Days Rented</th>
+                    <th scope="col">Cancel</th>
+                    <th scope="col">Extend</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars_rented %}
+                <tr>
+                    <td>{{ car['car_name'] }}</td>
+                    <td>{{ car['nm_days_rented'] }}</td>
+                    <td>
+                        <form action="{{ url_for('users.cancel_car', car_name=car['car_name'], user_id=current_user.id) }}" method="POST">
+                            <button class="btn btn-warning" type="submit">CANCEL</button>
+                        </form> 
+                    </td>
+                    <td>
+                        <form action="{{ url_for('users.extend_rent', car_name=car['car_name'], user_id=current_user.id) }}" method="GET">
+                            <input type="number" name="number_of_days" id="number_of_days" class="form-control" placeholder="Days to rent" aria-label="Example text with button addon" aria-describedby="button-addon1" required>
+                            <button class="btn btn-success" type="submit">EXTEND</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else%}
       <div class="alert alert-primary" role="alert">
             Once you buy or rent a car, it will appear here.
-      </div>      
+      </div>          
     {% endif %}
     <div id="button_container">
         <a class="btn btn-primary" href="{{url_for('users.editUser', email=currentUser.email)}}" role="button">Edit profile</a>

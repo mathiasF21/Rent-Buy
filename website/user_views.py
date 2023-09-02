@@ -11,8 +11,9 @@ bp = Blueprint('users',__name__,url_prefix='/My_Account/')
 def show_user(email):
     try:
         currentUser = db.get_user(email)
-        cars_rented_bought = db.get_customer_cars(currentUser.id)
-        return render_template('userInformation.html', currentUser=currentUser, cars_rented_bought=cars_rented_bought)
+        cars_bought = db.get_customer_cars_bought(currentUser.id)
+        cars_rented = db.get_customer_cars_rented(currentUser.id)
+        return render_template('userInformation.html', currentUser=currentUser, cars_bought=cars_bought, cars_rented=cars_rented)
     except Exception as e:
         abort(404)
 
