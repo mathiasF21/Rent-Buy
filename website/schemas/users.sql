@@ -1,11 +1,9 @@
-create database CarsDb;
-
 CREATE TABLE Users (
     id INT IDENTITY PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(300) NOT NULL,
-    user_type VARCHAR(50) DEFAULT 'member',
+    user_type INT DEFAULT 2,
     funds decimal DEFAULT 2000 NOT NULL
 );
 
@@ -25,8 +23,18 @@ CREATE TABLE Cars (
     seats_number INT NOT NULL,
     bags_number INT NOT NULL,
     rent_price DECIMAL(10, 2) NOT NULL,
-    full_price DECIMAL(10, 2) NOT NULL
+    full_price DECIMAL(10, 2) NOT NULL,
+	cars_in_stock INT DEFAULT 10 NOT NULL
 );
+
+CREATE TABLE User_type (
+    user_type_id INT IDENTITY PRIMARY KEY,
+    type_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Insert the user types (admin and member)
+INSERT INTO User_type (type_name) VALUES ('admin');
+INSERT INTO User_type (type_name) VALUES ('member');
 
 INSERT INTO Cars VALUES('Brabus Convertible','The Smart Brabus Convertible is a sleek and sporty two-seater car that combines the iconic design of the Smart Fortwo Convertible with the high-performance enhancements provided by Brabus, a renowned tuning company. This collaboration results in a compact yet powerful convertible that delivers an exhilarating driving experience.', 2, 2, 50, 30000);
 INSERT INTO Cars VALUES('Ford Focus','The Ford Focus is a popular compact car that has gained a reputation for its versatility, practicality, and enjoyable driving dynamics. With its stylish design, advanced technology, and range of available trims, the Ford Focus appeals to a wide range of drivers.', 4, 2, 60, 45000);
@@ -36,6 +44,8 @@ INSERT INTO Cars VALUES('Toyota Rav4','The Toyota RAV4 is a popular compact SUV 
 INSERT INTO Cars VALUES('Audi Sedan','Audi sedans are known for their sophisticated design, advanced technology, and exceptional performance. With their sleek profiles, luxurious interiors, and a range of available models, Audi sedans cater to those seeking a combination of style, comfort, and driving dynamics.', 4, 2, 67, 80000);
 INSERT INTO Cars VALUES('Hyundai Tucson Hybrid','The Hyundai Tucson Hybrid is a hybrid version of the popular compact SUV, offering a combination of fuel efficiency, modern design, and versatile functionality. With its hybrid powertrain, the Tucson Hybrid provides an eco-friendly driving experience without compromising on performance and practicality.', 4, 3, 95, 90000);
 INSERT INTO Cars VALUES('BMW 3 Series Sedan','The BMW 3 Series Sedan is an iconic luxury compact sedan that combines sportiness, elegance, and cutting-edge technology. Renowned for its dynamic driving experience and sophisticated design, the 3 Series Sedan has been a symbol of driving pleasure and craftsmanship for decades.', 4, 2, 68, 55000);
+
+
 
 
 
