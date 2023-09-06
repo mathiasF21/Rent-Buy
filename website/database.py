@@ -97,10 +97,11 @@ class Database:
         
     def get_cars(self):
         cars = []
-        result  = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price FROM Cars')
+        result  = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price, cars_in_stock FROM Cars')
         for row in result:
             car = Car(row[1],row[2],row[3],row[4],row[5], row[6])
             car.car_id = row[0]
+            car.cars_in_stock = row[7]
             cars.append(car)
         return cars
     

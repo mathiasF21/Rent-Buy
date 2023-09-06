@@ -49,5 +49,13 @@ def rent_car(car_name, user_id):
         flash("Error occurred.", category='error')
     return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
 
+@bp.route('/in-stock/')
+def display_cars():
+    try:
+        cars = db.get_cars()
+        return render_template('cars_in_stock.html',cars=cars)
+    except:
+        flash("Not able to diplay cars.", category='error')
+
 
 

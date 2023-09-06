@@ -15,6 +15,7 @@ class Car():
         self.bags_number = bags_number
         self.full_price = full_price
         self.car_id = None
+        self.cars_in_stock = None
         
     def __repr__(self):
         return f'User({self.name}, {self.description}, {self.full_price}, {self.rent_price})'
@@ -36,5 +37,6 @@ class Car():
             seats_number=car_json.get('seats_number'),
             bags_number=car_json.get('bags_number'),
             rent_price=car_json.get('rent_price'),
-            full_price=car_json.get('full_price') 
+            full_price=car_json.get('full_price'),
+            cars_in_stock=car_json.get('cars_in_stock') 
         )

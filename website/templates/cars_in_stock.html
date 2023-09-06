@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Our stock
+{% endblock %}
+
+{% block content %}
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">car_id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Bags</th>
+            <th scope="col">Rent</th>
+            <th scope="col">Full</th>
+            <th scope="col">In stock</th>
+            <th scope="col">Edit/Add stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <th scope="row">{{ car['car_id'] }}</th>
+                <td>{{ car['name'] }}</td>
+                <td>{{ car['seats_number'] }}</td>
+                <td>{{ car['bags_number'] }}</td>
+                <td>{{ car['rent_price'] }}</td>
+                <td>{{ car['full_price'] }}</td>
+                <td>{{ car['cars_in_stock'] }}</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="#" class="btn btn-primary mx-auto">Add a new car</a>
+    </div>    
+{%endblock%}
