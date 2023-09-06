@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Car
+{% endblock %}
+    
+{% block content %}
+    <form class="edit_car_form w-75 mx-auto" method="POST">
+        <h1>Edit</h1>
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.name.label }} 
+            {{ form.name(class="form-control", placeholder="Enter name", value=carChosen.name) }}
+        </div>
+        <div class="form-group">
+            {{ form.description.label }} 
+            {{ form.description(class="form-control", placeholder="Enter description", value=carChosen.description) }}
+        </div>
+        <div class="form-group">
+            {{ form.seats_number.label }} 
+            {{ form.seats_number(class="form-control", placeholder="Enter seats number", value=carChosen.seats_number) }}
+        </div>
+        <div class="form-group">
+            {{ form.bags_number.label }} 
+            {{ form.bags_number(class="form-control", placeholder="Enter bags number", value=carChosen.bags_number) }}
+        </div>
+        <div class="form-group">
+            {{ form.rent_price.label }} 
+            {{ form.rent_price(class="form-control", placeholder="Enter rent price", value=carChosen.rent_price) }}
+        </div>
+        <div class="form-group">
+            {{ form.full_price.label }} 
+            {{ form.full_price(class="form-control", placeholder="Enter full price", value=carChosen.full_price) }}
+        </div>
+        <div class="form-group">
+            {{ form.cars_in_stock.label }} 
+            {{ form.cars_in_stock(class="form-control", placeholder="Add cars in stock", value=carChosen.cars_in_stock) }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary", id="form_button") }}
+        </div>
+    </form>
+    <div class="wave">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>    
+{% endblock %}

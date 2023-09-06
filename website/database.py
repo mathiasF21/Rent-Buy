@@ -89,9 +89,10 @@ class Database:
     def get_car(self, name):
         if not isinstance(name, str):
             raise TypeError("Expected a string.")
-        result = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price FROM Cars WHERE name = ?', (name))
+        result = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price, cars_in_stock FROM Cars WHERE name = ?', (name))
         for row in result:
             car = Car(row[1], row[2], row[3], row[4], row[5], row[6])
+            car.cars_in_stock = row[7]
             car.car_id = row[0]
             return car
         
@@ -125,8 +126,8 @@ class Database:
             raise TypeError("Expected a Car object")
         if not isinstance(car_id, int):
             raise TypeError("Expected an integer")
-        sql = 'UPDATE Cars SET name = ?, description = ?, seats_number = ?, bags_number = ?, rent_price = ?, full_price = ? WHERE car_id = ?'
-        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car_id))
+        sql = 'UPDATE Cars SET name = ?, description = ?, seats_number = ?, bags_number = ?, rent_price = ?, full_price = ?, cars_in_stock = ? WHERE car_id = ?'
+        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car.cars_in_stock, car_id))
         self.conn.commit()
 
     def buy_car(self, car_id, user_id, full_price):

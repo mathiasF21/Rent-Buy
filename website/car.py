@@ -1,3 +1,7 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, IntegerField, FloatField, TextAreaField
+from wtforms.validators import DataRequired
+
 class Car():
     def __init__(self, name, description, seats_number, bags_number, rent_price, full_price):
         if not isinstance(name, str):
@@ -40,3 +44,13 @@ class Car():
             full_price=car_json.get('full_price'),
             cars_in_stock=car_json.get('cars_in_stock') 
         )
+    
+class CarEditForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    description = TextAreaField("Description", validators=[DataRequired()])
+    seats_number = IntegerField('Seats Number', validators=[DataRequired()])
+    bags_number = IntegerField('Bags Number', validators=[DataRequired()])
+    rent_price = FloatField('Rent Price', validators=[DataRequired()])
+    full_price = FloatField('Full Price', validators=[DataRequired()])
+    cars_in_stock = IntegerField('In Stock', validators=[DataRequired()])
+    submit = SubmitField('Submit')
