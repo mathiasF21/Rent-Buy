@@ -1,6 +1,6 @@
 from flask import Blueprint, abort, render_template, request, flash
 from .database import Database
-from .car import CarEditForm
+from .car import Car, CarEditForm
 
 db = Database()
 
@@ -64,7 +64,8 @@ def edit_car(car_name):
         carChosen = db.get_car(car_name)
         form = CarEditForm()
         if request.method == 'POST' and form.validate_on_submit():
-            db.update_car(carChosen.car_id,carChosen)
+            carChanged = Car(car_name,form.description.data,form.seats_number.data,form.bags_number.data,form.rent_price.data,form.full_price.data,form.cars_in_stock.data)
+            db.update_car(carChosen.car_id,carChanged)
             flash(f'Successfully updated the car {car_name}', category='success')
         return render_template('edit_car.html',carChosen=carChosen, form=form)
     except Exception as e:

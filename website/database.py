@@ -91,8 +91,7 @@ class Database:
             raise TypeError("Expected a string.")
         result = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price, cars_in_stock FROM Cars WHERE name = ?', (name))
         for row in result:
-            car = Car(row[1], row[2], row[3], row[4], row[5], row[6])
-            car.cars_in_stock = row[7]
+            car = Car(row[1], row[2], row[3], row[4], row[5], row[6], row[7])
             car.car_id = row[0]
             return car
         
@@ -100,18 +99,17 @@ class Database:
         cars = []
         result  = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price, cars_in_stock FROM Cars')
         for row in result:
-            car = Car(row[1],row[2],row[3],row[4],row[5], row[6])
+            car = Car(row[1],row[2],row[3],row[4],row[5], row[6], row[7])
             car.car_id = row[0]
-            car.cars_in_stock = row[7]
             cars.append(car)
         return cars
     
     def get_car_id(self, car_id):
         if not isinstance(car_id, int):
             raise TypeError("Expected an integer.")
-        result = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price FROM Cars WHERE car_id = ?', (car_id))
+        result = self.cursor.execute('SELECT car_id, name, description, seats_number, bags_number, rent_price, full_price, cars_in_stock FROM Cars WHERE car_id = ?', (car_id))
         for row in result:
-            car = Car(row[1], row[2], row[3], row[4], row[5], row[6])
+            car = Car(row[1], row[2], row[3], row[4], row[5], row[6], row[7])
             car.car_id = row[0]
             return car
         
