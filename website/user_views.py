@@ -57,17 +57,27 @@ def sell_car(car_name, user_id):
     except Exception as e:
         abort(404)
 
-@bp.route('/cancel/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
+@bp.route('/cancel/<string:car_name>/<int:user_id>/', methods=['GET', 'POST'])
 def cancel_car(car_name, user_id):
     try:
         currentUser = db.get_user_id(user_id)
+        if currentUser is None:
+            flash('User not found', category='error')
+            return redirect(url_for('some_error_page'))
+        
         car = db.get_car(car_name)
-        db.cancel_rent(car.car_id,user_id, car.rent_price)
-        flash(f'Successfully cancelled the rent car: {car_name}', category='success')
+        if car is None:
+            flash('Car not found', category='error')
+            return redirect(url_for('some_error_page'))
+        
+        db.cancel_rent(car.car_id, user_id, car.rent_price)
+        flash(f'Successfully cancelled the rent for car: {car_name}', category='success')
         email = currentUser.email
         return redirect(url_for('users.show_user', email=email))
     except Exception as e:
-        abort(404)
+        flash('An unexpected error occurred: {}'.format(str(e)), category='error')
+        return redirect(url_for('users.show_user.html'))
+
 
 @bp.route('/extend/<string:car_name>/<int:user_id>/', methods=['GET','POST'])
 def extend_rent(car_name, user_id): 

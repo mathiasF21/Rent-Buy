@@ -134,6 +134,7 @@ class Database:
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
         self.cursor.execute('UPDATE USERS SET funds = (funds - ?) WHERE id = ?',(full_price, user_id))
+        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock - 1 WHERE car_id = ?",(car_id))
         self.cursor.execute('INSERT INTO Cars_Owned (car_id, user_id, ownership_type) VALUES (?, ?, ?)', (car_id, user_id, 'bought'))
         self.conn.commit()
 
@@ -158,6 +159,7 @@ class Database:
         if not isinstance(number_of_days, int):
             raise TypeError("Expected an integer")
         self.cursor.execute('UPDATE USERS SET funds = funds - (? * ?) WHERE id = ?', (rent_price, number_of_days, user_id))
+        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock - 1 WHERE car_id = ?",(car_id))
         self.cursor.execute('INSERT INTO Cars_Owned (car_id, user_id, ownership_type, nm_days_rented) VALUES (?, ?, ?, ?)', (car_id, user_id, 'rented', number_of_days))
         self.conn.commit()
     
@@ -190,19 +192,23 @@ class Database:
             raise TypeError("Expected an integer")
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
-        self.cursor.execute('SELECT nm_days_rented FROM Cars_Owned WHERE car_id = ?', (car_id,))
+
+        self.cursor.execute('SELECT COALESCE(nm_days_rented, 0) FROM Cars_Owned WHERE car_id = ?', (car_id,))
         result = self.cursor.fetchone()
-        days_rented = result[0] if result else None
-        self.cursor.execute("DELETE FROM Cars_Owned WHERE (car_id = ? AND user_id = ?) AND ownership_type = ?",(car_id,user_id,'rented',))
+        days_rented = result[0] if result else 0 
+
+        self.cursor.execute("DELETE FROM Cars_Owned WHERE (car_id = ? AND user_id = ?) AND ownership_type = ?", (car_id, user_id, 'rented',))
+        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock + 1 WHERE car_id = ?", (car_id,))
         self.cursor.execute("UPDATE Users SET funds = funds + (? * ?)", (days_rented, rent_price))
         self.conn.commit()
-    
+        
     def sell_car(self, car_id, user_id, full_price):
         if not isinstance(car_id, int):
             raise TypeError("Expected an integer")
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
         self.cursor.execute("DELETE FROM Cars_Owned WHERE (car_id = ? AND user_id = ?) AND ownership_type = ?",(car_id,user_id,'bought',))
+        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock + 1 WHERE car_id = ?",(car_id))
         self.cursor.execute("UPDATE Users SET funds = funds + ? WHERE id = ?", (full_price, user_id,))
         self.conn.commit()
     
