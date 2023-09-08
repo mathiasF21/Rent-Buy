@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, abort, render_template, request, flash
 from .database import Database
+from .car import Car, CarEditForm
 
 db = Database()
 
@@ -49,5 +50,25 @@ def rent_car(car_name, user_id):
         flash("Error occurred.", category='error')
     return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
 
+@bp.route('/in-stock/', methods=['GET','POST'])
+def display_cars():
+    try:
+        cars = db.get_cars()
+        return render_template('cars_in_stock.html',cars=cars)
+    except:
+        flash("Not able to diplay cars.", category='error')
+
+@bp.route('/edit/<string:car_name>/', methods=['GET','POST'])
+def edit_car(car_name): 
+    try:
+        carChosen = db.get_car(car_name)
+        form = CarEditForm()
+        if request.method == 'POST' and form.validate_on_submit():
+            carChanged = Car(car_name,form.description.data,form.seats_number.data,form.bags_number.data,form.rent_price.data,form.full_price.data,form.cars_in_stock.data)
+            db.update_car(carChosen.car_id,carChanged)
+            flash(f'Successfully updated the car {car_name}', category='success')
+        return render_template('edit_car.html',carChosen=carChosen, form=form)
+    except Exception as e:
+        abort(404)
 
 

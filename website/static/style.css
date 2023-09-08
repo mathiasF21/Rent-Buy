@@ -38,7 +38,7 @@ h1 {
     border-bottom: solid  #234E70;
     border-radius: 1%;
 }
-.sign_up_form, .sign_in_form, .edit_user_form, .change_pdw_form{
+.sign_up_form, .sign_in_form, .edit_user_form, .change_pdw_form, .edit_car_form {
     max-width: 400px;
     margin: auto;
     margin-top: 40px;

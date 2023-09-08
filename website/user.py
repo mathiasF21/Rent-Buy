@@ -4,7 +4,7 @@ from wtforms import EmailField, PasswordField, StringField, SubmitField, Integer
 from wtforms.validators import DataRequired,EqualTo, Regexp, Length
 
 class User(UserMixin):
-    def __init__(self, email, password, name, user_type="member", funds=0):
+    def __init__(self, email, password, name, user_type=2, funds=0):
         if not isinstance(email, str):
             raise TypeError('Email must be a string')
         if not isinstance(password, str):

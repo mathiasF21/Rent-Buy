@@ -22,9 +22,12 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{url_for('home.about')}}">About</a>
               </li>
+            </ul>
+            <!-- Move Sign Up and Sign In to the right -->
+            <ul class="navbar-nav ms-auto">
               {% if not current_user.is_authenticated %}
                 <li class="nav-item" id="open-button">
-                  <a class="nav-link active" aria-current="page" href="{{url_for('auth.sign_up')}}">Open an account</a>
+                  <a class="nav-link active" aria-current="page" href="{{url_for('auth.sign_up')}}">Sign Up</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{{url_for('sign_in.sign_in')}}">Sign in</a>
@@ -37,11 +40,16 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{{url_for('users.show_user', email=current_user.email)}}">My Account</a>
                 </li>
+                {% if current_user.user_type == 1 %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('info.display_cars', email=current_user.email)}}">Our Stock</a>
+                  </li>
+                {% endif %}
               {% endif %}
             </ul>
           </div>
         </div>
-      </nav>
+      </nav>      
       {% with messages = get_flashed_messages(with_categories=true) %} 
         {% if messages %} 
           {% for category, message in messages %} 
