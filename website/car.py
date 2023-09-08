@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, FloatField, TextAreaField
+from wtforms import FileField, SubmitField, IntegerField, FloatField, TextAreaField
 from wtforms.validators import DataRequired
 
 class Car():
@@ -55,3 +55,7 @@ class CarEditForm(FlaskForm):
     full_price = FloatField('Full Price', validators=[DataRequired()])
     cars_in_stock = IntegerField('In Stock', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class UploadFileForm(FlaskForm):
+    file = FileField("File")
+    submit = SubmitField("Upload File")
