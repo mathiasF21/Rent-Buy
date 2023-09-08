@@ -179,11 +179,11 @@ class Database:
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
         self.cursor.execute("""
-                            SELECT DISTINCT Cars.name AS car_name, Cars_Owned.ownership_type AS ownership_type, nm_days_rented 
+                            SELECT Users.name AS owner_name, Cars.name AS car_name, Cars_Owned.ownership_type AS ownership_type, Cars_Owned.nm_days_rented
                             FROM Cars_Owned
-                            INNER JOIN Users ON Cars_Owned.user_id = ?
+                            INNER JOIN Users ON Cars_Owned.user_id = Users.id
                             INNER JOIN Cars ON Cars_Owned.car_id = Cars.car_id
-                            WHERE Cars_Owned.ownership_type = 'bought';
+                            WHERE Users.id = ? AND Cars_Owned.ownership_type = 'bought';
                             """, (user_id,))
         return self.cursor.fetchall()
     
@@ -207,8 +207,11 @@ class Database:
             raise TypeError("Expected an integer")
         if not isinstance(user_id, int):
             raise TypeError("Expected an integer")
-        self.cursor.execute("DELETE FROM Cars_Owned WHERE (car_id = ? AND user_id = ?) AND ownership_type = ?",(car_id,user_id,'bought',))
-        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock + 1 WHERE car_id = ?",(car_id))
+        self.cursor.execute(
+            "DELETE TOP (1) FROM Cars_Owned WHERE car_id = ? AND user_id = ? AND ownership_type = 'bought'",
+            (car_id, user_id)
+        )
+        self.cursor.execute("UPDATE Cars SET cars_in_stock = cars_in_stock + 1 WHERE car_id = ?", (car_id,))
         self.cursor.execute("UPDATE Users SET funds = funds + ? WHERE id = ?", (full_price, user_id,))
         self.conn.commit()
     

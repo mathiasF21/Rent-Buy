@@ -23,6 +23,9 @@ def buy_car(car_name, user_id):
         if userFunds < carChosen.full_price:
             flash("Oh no! You don't have enough funds to buy this car.", category='error')
             return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
+        elif carChosen.cars_in_stock <= 0:
+            flash("Oh no! There are no more cars in stock.", category='error')
+            return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
         else:
             db.buy_car(carChosen.car_id, user_id, carChosen.full_price)
             flash("Congratulations! You can now go pick up your new car.", category='success')
@@ -39,6 +42,9 @@ def rent_car(car_name, user_id):
         number_of_days = int(request.args.get('number_of_days'))
         if number_of_days <= 0:
             flash("It cannot be zero or a negative number", category='error')
+            return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
+        elif carChosen.cars_in_stock <= 0:
+            flash("Oh no! There are no more cars in stock.", category='error')
             return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
         elif userFunds < carChosen.rent_price * number_of_days:
             flash("Oh no! You don't have enough funds to rent this car, try with less days.", category='error')
