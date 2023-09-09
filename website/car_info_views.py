@@ -4,7 +4,15 @@ from .car import Car, CarEditForm
 
 db = Database()
 
-bp = Blueprint("info", __name__, url_prefix='/car-information/')
+bp = Blueprint("info", __name__, url_prefix='/Cars/')
+
+@bp.route('/', methods=['GET', 'POST'])
+def display_collection():
+    try:
+        cars = db.get_cars()
+    except Exception as e:
+        flash("Error occurred.", category='error')
+    return render_template("cars.html", cars=cars)
 
 @bp.route('/<string:car_name>/', methods=['GET', 'POST'])
 def display_information(car_name):
@@ -56,7 +64,7 @@ def rent_car(car_name, user_id):
         flash("Error occurred.", category='error')
     return render_template('carInformation.html', car_name=carChosen.name, car=carChosen)
 
-@bp.route('/in-stock/', methods=['GET','POST'])
+@bp.route('/In stock/', methods=['GET','POST'])
 def display_cars():
     try:
         cars = db.get_cars()
