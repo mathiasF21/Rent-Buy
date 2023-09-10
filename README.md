@@ -14,7 +14,7 @@ Editor: Visual Studio Code
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/c6ac8ed6-6ece-4f98-a8e7-6f2542c54a76)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/5de49d26-c56a-42e5-ac67-7840d4ce35ba)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/74ddf2f9-5429-45ab-87b9-b90df12303b1)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/ff34642c-5731-42db-bdb0-8ba60ceb48de)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/afd70aba-dc50-43cb-9f5b-4f6db2dcba45)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/96588354-02e8-4a84-b70c-90bef0bfb797)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/c814522a-9c70-4fa7-91e7-3cefaa2253a2)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/81d7d6fb-5cc7-4d35-aaf6-914cf9aa459a)
