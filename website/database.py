@@ -147,8 +147,8 @@ class Database:
     def add_car(self, car):
         if not isinstance(car, Car):
             raise TypeError("Expected a Car object")
-        sql = 'INSERT INTO Cars (name,description,seats_number,bags_number,rent_price,full_price) VALUES (?,?,?,?,?,?)'
-        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price))                                                                                                 
+        sql = 'INSERT INTO Cars (name,description,seats_number,bags_number,rent_price,full_price,cars_in_stock) VALUES (?,?,?,?,?,?,?)'
+        self.cursor.execute(sql, (car.name, car.description, car.seats_number, car.bags_number, car.rent_price, car.full_price, car.cars_in_stock))                                                                                                 
         self.conn.commit()
 
     def rent_car(self, car_id, user_id, number_of_days, rent_price):

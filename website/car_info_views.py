@@ -1,6 +1,6 @@
 from flask import Blueprint, abort, render_template, request, flash
 from .database import Database
-from .car import Car, CarEditForm
+from .car import Car, CarEditForm, AddCarForm
 
 db = Database()
 
@@ -10,9 +10,14 @@ bp = Blueprint("info", __name__, url_prefix='/Cars/')
 def display_collection():
     try:
         cars = db.get_cars()
+        form = AddCarForm()
+        if request.method == 'POST' and form.validate_on_submit():
+            newCar = Car(form.name.data,form.description.data,form.seats_number.data,form.bags_number.data,form.rent_price.data,form.full_price.data,form.cars_in_stock.data)
+            db.add_car(newCar)
+            flash(f'Successfully added the car {form.name.data}', category='success')
     except Exception as e:
         flash("Error occurred.", category='error')
-    return render_template("cars.html", cars=cars)
+    return render_template("cars.html", cars=cars, form=form)
 
 @bp.route('/<string:car_name>/', methods=['GET', 'POST'])
 def display_information(car_name):
