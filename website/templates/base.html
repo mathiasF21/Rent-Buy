@@ -22,8 +22,10 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{url_for('home.about')}}">About</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('info.display_collection')}}">Cars</a>
+              </li>
             </ul>
-            <!-- Move Sign Up and Sign In to the right -->
             <ul class="navbar-nav ms-auto">
               {% if not current_user.is_authenticated %}
                 <li class="nav-item" id="open-button">

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Our Cars
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% for car in cars %}
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ car['name'] }}</h5>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{{url_for('info.display_information', car_name=car['name'])}}" class="btn btn-primary">Buy/Rent</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if current_user.is_authenticated and current_user.user_type == 1 %}
+    <div class="container mb-5">
+        <form class="add_car_form" method="POST">
+            <h1>Add a car</h1>
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.name.label }} 
+                {{ form.name(class="form-control", placeholder="Enter name") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }} 
+                {{ form.description(class="form-control", placeholder="Enter description") }}
+            </div>
+            <div class="form-group">
+                {{ form.seats_number.label }} 
+                {{ form.seats_number(class="form-control", placeholder="Enter seats number") }}
+            </div>
+            <div class="form-group">
+                {{ form.bags_number.label }} 
+                {{ form.bags_number(class="form-control", placeholder="Enter bags number") }}
+            </div>
+            <div class="form-group">
+                {{ form.rent_price.label }} 
+                {{ form.rent_price(class="form-control", placeholder="Enter rent price") }}
+            </div>
+            <div class="form-group">
+                {{ form.full_price.label }} 
+                {{ form.full_price(class="form-control", placeholder="Enter full price") }}
+            </div>
+            <div class="form-group">
+                {{ form.cars_in_stock.label }} 
+                {{ form.cars_in_stock(class="form-control", placeholder="Add cars in stock") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary", id="form_button") }}
+            </div>
+        </form>
+    </div>  
+    {% endif %}
+{%endblock%}
