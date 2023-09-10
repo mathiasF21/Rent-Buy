@@ -19,13 +19,14 @@ Editor: Visual Studio Code
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/96588354-02e8-4a84-b70c-90bef0bfb797)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/dafc60b6-383f-46c6-99ed-1ea033795e29)
 ![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/3ed2ccfb-f33f-4a1a-88d5-35fb26d636cc)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/3fe59d4d-ef09-4895-a339-2c3c23638c7f)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/03a3d87a-9b49-4c8a-a128-4af0ff7bd549)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/53d93554-c7cc-42e5-b3b6-569ce22e21a4)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/0aefffa3-58df-412d-a38d-53e5f52ebd07)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/71a9d6bd-e0bb-4b4c-959b-721071823cd2)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/d1d6a458-63e5-45b7-9e99-5ad010a5a3de)
-![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/d2e5cdfc-03ec-4a9d-ab22-5c7e8c964c8e)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/71351f98-97c1-4c58-8112-a8f12a43d950)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/469f3657-2633-4537-b48c-c9fc449a1b95)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/b4c5b9fe-a1bb-4509-819c-16ce0193f9a7)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/5c8b72a6-835d-4412-b9c2-fa259efe2003)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/f51d4583-a99a-4551-967d-05281926f87c)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/ed4e2741-dba2-46b9-bb03-9b9dc8aa8a1e)
+![image](https://github.com/mathiasF21/Rent-Buy/assets/107279216/1556fa2e-96f7-4def-947f-bbf4be6ca9b4)
+
 
 
 
